@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:p_anonymus/page/aricle_text.dart';
 import 'package:p_anonymus/page/login.dart';
 
 void main() {

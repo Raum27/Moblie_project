@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:p_anonymus/module/contents.dart';
+import 'package:http/http.dart' as http;
 import 'aricle_contents.dart';
 
 class Aricle_text extends StatefulWidget {
@@ -13,9 +14,25 @@ class Aricle_text extends StatefulWidget {
 class _Aricle_textState extends State<Aricle_text> {
   var mode = false;
   _Aricle_textState(this.mode);
+  /*                          */
+  // void initState() {
+  //   super.initState();
+  //   _loadData();
+  // }
+
+  // void _loadData() async {
+  //   var url = 'http://127.0.0.1:8000/contents';
+  //   var uri = Uri.parse(url);
+  //   var response = await http.get(uri);
+  //   var body = response.body;
+  //   print(body);
+  //   setState(() {});
+  // }
+  /*                          */
 
   @override
   Widget build(BuildContext context) {
+    // initState();
     return Scaffold(
         appBar: AppBar(title: Text('นิยาย')),
         backgroundColor: mode == true

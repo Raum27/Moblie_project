@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:p_anonymus/page/register.dart';
 import 'aricle_text.dart';
 
 class Phone_layout extends StatefulWidget {
@@ -12,6 +13,9 @@ class Phone_layout extends StatefulWidget {
 class _Phone_layoutState extends State<Phone_layout> {
   var _phone_number = '';
   var mode = true;
+  var _checkID = false;
+
+  static var cc = '1123';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +95,10 @@ class _Phone_layoutState extends State<Phone_layout> {
                   child: TextButton(
                       child: Text('สมัคร'),
                       onPressed: () {
-                        print('Pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RegisterNumber()));
                       }),
                 ),
                 Padding(
@@ -99,12 +106,17 @@ class _Phone_layoutState extends State<Phone_layout> {
                   child: TextButton(
                       child: Text('ล็อคอิน'), // ต้องมีการเช็คเงื่อนไขตรงนี้
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Aricle_text(
-                                    mode:
-                                        mode))); /////////////////////////////////////////
+                        if (_phone_number == cc) {
+                          print("successful");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Aricle_text(mode: mode)));
+                        } else {
+                          check_ID();
+                          // setState(() {});
+                        }
                       }),
                 )
               ],
@@ -143,6 +155,34 @@ class _Phone_layoutState extends State<Phone_layout> {
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
         ),
+      ),
+    );
+  }
+
+  void check_ID() {
+    _showSnackBar(
+      'เบอร์มือถือนี้ยังไม่ได้ลงทะเบียน  หรือ ใส่ไม่ถูกต้อง!!!',
+      action: SnackBarAction(
+        label: 'Close',
+        onPressed: () {},
+      ),
+    );
+  }
+
+  void _showSnackBar(String message,
+      {int? durationSeconds, SnackBarAction? action}) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: TextStyle(
+              color: mode == true
+                  ? Color.fromARGB(255, 245, 245, 245)
+                  : Color.fromARGB(255, 255, 174, 0)),
+        ),
+        duration: Duration(seconds: 3),
+        action: action,
       ),
     );
   }
