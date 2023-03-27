@@ -74,8 +74,8 @@ class _Text_contentsState extends State<Text_contents> {
                           child: Image.network(
                             image,
                             // fit: BoxFit.cover,
-                            height: 200,
-                            width: 200,
+                            height: 350,
+                            width: 550,
                           ),
                         ),
                         const SizedBox(
@@ -127,27 +127,32 @@ class _Text_contentsState extends State<Text_contents> {
                   ),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     _text_summarizer == null
-                        ? Text("")
-                        : Container(
-                            width: 800,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text('${_text_summarizer!.contents}',
-                                  style: TextStyle(
-                                    color: mode == true
-                                        ? Color.fromARGB(255, 73, 73, 73)
-                                        : Color.fromARGB(255, 253, 174, 3),
-                                  )),
+                        ? const Text("")
+                        : Expanded(
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16.0, vertical: 12.0),
+                                  child: Text(
+                                    '${_text_summarizer!.contents}',
+                                    style: TextStyle(
+                                      color: mode == true
+                                          ? Color.fromARGB(255, 73, 73, 73)
+                                          : Color.fromARGB(255, 253, 174, 3),
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                Container(
+                                  width: 750,
+                                  height: 5,
+                                  color: Color.fromARGB(255, 72, 166, 243),
+                                  // child: Row(),
+                                ),
+                              ],
                             ),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: mode == true
-                                      ? Color.fromARGB(255, 253, 174, 3)
-                                      : Color.fromARGB(255, 255, 255, 255),
-                                  width: 3.0),
-                              borderRadius: BorderRadius.circular(16.0),
-                            ),
-                          )
+                          ),
                   ]),
                   SizedBox(
                     height: 10,
