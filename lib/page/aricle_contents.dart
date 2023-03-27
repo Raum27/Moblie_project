@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:p_anonymus/module/contents.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:p_anonymus/services/api_client.dart';
+
+import '../module/textsummary.dart';
 
 class Text_contents extends StatefulWidget {
   final Contents contents;
@@ -13,13 +16,19 @@ class Text_contents extends StatefulWidget {
 
 class _Text_contentsState extends State<Text_contents> {
   var mode;
+  var _isnotsummarizer = false;
+  Textsummarizer? _text_summarizer;
   _Text_contentsState(this.mode);
+  void loadsummarizer() async {
+    _text_summarizer = await ApiClient().summarizer();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     var title = widget.contents.title;
     var detail = widget.contents.contents;
-    var image =
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNM-KC3hVYmSf6x6bwtcekiAhOzLGkHX6taQ&usqp=CAU';
+    var image = widget.contents.image;
     return Scaffold(
       appBar: AppBar(
         title: Text('${title}'),
@@ -107,9 +116,39 @@ class _Text_contentsState extends State<Text_contents> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                          onPressed: () {}, child: Text('สรุปบทความ')),
+                          onPressed: () {
+                            setState(() {
+                              _isnotsummarizer = true;
+                              loadsummarizer();
+                            });
+                          },
+                          child: Text('สรุปบทความ')),
                     ),
                   ),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    _text_summarizer == null
+                        ? Text("")
+                        : Container(
+                            width: 800,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('${_text_summarizer!.contents}',
+                                  style: TextStyle(
+                                    color: mode == true
+                                        ? Color.fromARGB(255, 73, 73, 73)
+                                        : Color.fromARGB(255, 253, 174, 3),
+                                  )),
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: mode == true
+                                      ? Color.fromARGB(255, 253, 174, 3)
+                                      : Color.fromARGB(255, 255, 255, 255),
+                                  width: 3.0),
+                              borderRadius: BorderRadius.circular(16.0),
+                            ),
+                          )
+                  ]),
                   SizedBox(
                     height: 10,
                   ),

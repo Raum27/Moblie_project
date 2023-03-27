@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:p_anonymus/page/register.dart';
+import '../module/test.dart';
 import 'aricle_text.dart';
 
 class Phone_layout extends StatefulWidget {
@@ -13,8 +14,7 @@ class Phone_layout extends StatefulWidget {
 class _Phone_layoutState extends State<Phone_layout> {
   var _phone_number = '';
   var mode = true;
-  var _checkID = false;
-
+  List<Testapi>? _testapi;
   static var cc = '1123';
   @override
   Widget build(BuildContext context) {
