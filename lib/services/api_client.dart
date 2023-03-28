@@ -27,19 +27,19 @@ class ApiClient {
     return result.map((item) => Contents.fromJson(item)).toList();
   }
 
-  Future<Textsummarizer?> summarizer() async {
-    Uri uri = Uri.parse('${apiBaseUrl}/summarizer');
+  Future<Textsummarizer?> summarizer(String str) async {
+    Uri uri = Uri.parse('${apiBaseUrl}/summarizer/?text=${str}');
     var response = await http.get(uri);
     var result = jsonDecode(utf8.decode(response.bodyBytes));
     return Textsummarizer.fromJson(result);
   }
 }
 
-void check_out() async {
-  var ccc = await ApiClient().summarizer();
-  print(ccc!.contents);
-}
+// void check_out() async {
+//   var ccc = await ApiClient().summarizer();
+//   print(ccc!.contents);
+// }
 
-void main() {
-  check_out();
-}
+// void main() {
+//   check_out();
+// }

@@ -19,8 +19,8 @@ class _Text_contentsState extends State<Text_contents> {
   var _isnotsummarizer = false;
   Textsummarizer? _text_summarizer;
   _Text_contentsState(this.mode);
-  void loadsummarizer() async {
-    _text_summarizer = await ApiClient().summarizer();
+  void loadsummarizer(String str) async {
+    _text_summarizer = await ApiClient().summarizer(str);
     setState(() {});
   }
 
@@ -119,10 +119,10 @@ class _Text_contentsState extends State<Text_contents> {
                           onPressed: () {
                             setState(() {
                               _isnotsummarizer = true;
-                              loadsummarizer();
+                              loadsummarizer(detail);
                             });
                           },
-                          child: Text('สรุปบทความ')),
+                          child: Text('สรุปข่าว')),
                     ),
                   ),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [

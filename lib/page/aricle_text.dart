@@ -35,10 +35,8 @@ class _Aricle_textState extends State<Aricle_text> {
 
   @override
   Widget build(BuildContext context) {
-    print("hhhhhhhhhhhhhhhhhhhhhh");
-    print(_isloading);
     return Scaffold(
-        appBar: AppBar(title: Text('บทความ')),
+        appBar: AppBar(title: Text('ข่าว')),
         backgroundColor: mode == true
             ? Color.fromARGB(255, 245, 245, 245)
             : Color.fromARGB(255, 73, 73, 73),
@@ -61,16 +59,13 @@ class _Aricle_textState extends State<Aricle_text> {
             ),
             _content_text == null
                 ? Center(child: CircularProgressIndicator())
-                : Container(
-                    width: 400,
-                    child: Expanded(
-                      child: ListView.builder(
-                        itemCount: _content_text!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Genarate_widget(
-                              _content_text![index], context, mode);
-                        },
-                      ),
+                : Expanded(
+                    child: ListView.builder(
+                      itemCount: _content_text!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Genarate_widget(
+                            _content_text![index], context, mode);
+                      },
                     ),
                   ),
           ],
@@ -104,8 +99,8 @@ Widget Genarate_widget(Contents c, BuildContext context, var mode) {
             children: [
               Image.network(
                 image,
-                width: 70,
-                height: 70,
+                width: 200,
+                height: 150,
                 fit: BoxFit.cover,
               ),
               Expanded(

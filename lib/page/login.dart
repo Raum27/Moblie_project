@@ -15,7 +15,7 @@ class _Phone_layoutState extends State<Phone_layout> {
   var _phone_number = '';
   var mode = true;
   List<Testapi>? _testapi;
-  static var cc = '1123';
+  static var cc = '#1123';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,86 +40,101 @@ class _Phone_layoutState extends State<Phone_layout> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 50),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.lock,
-                      size: 100.0,
-                      color: mode == true
-                          ? Color.fromARGB(255, 73, 73, 73)
-                          : Color.fromARGB(255, 245, 245, 245),
-                    ),
-                    Text("กรุณาใส่รัหสผ่าน",
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: mode == true
-                                ? Color.fromARGB(255, 73, 73, 73)
-                                : Color.fromARGB(255, 245, 245, 245))),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: Text(
-                        '$_phone_number',
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: mode == true
-                                ? Color.fromARGB(255, 73, 73, 73)
-                                : Color.fromARGB(255, 245, 245, 245)),
+              Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 50),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("CIA หน่วยข่าวกรองแห่งชาด",
+                          style: TextStyle(
+                              fontSize: 45,
+                              fontWeight: FontWeight.bold,
+                              color: mode == true
+                                  ? Color.fromARGB(255, 53, 53, 53)
+                                  : Color.fromARGB(255, 255, 174, 0))),
+                      Icon(
+                        Icons.person_4_rounded,
+                        size: 100.0,
+                        color: mode == true
+                            ? Color.fromARGB(255, 61, 61, 61)
+                            : Color.fromARGB(255, 255, 174, 0),
                       ),
-                    )
-                  ],
+                      Text("กรุณาใส่รัหสผ่าน",
+                          style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: mode == true
+                                  ? Color.fromARGB(255, 53, 53, 53)
+                                  : Color.fromARGB(255, 255, 174, 0))),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: Text(
+                          '$_phone_number',
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: mode == true
+                                  ? Color.fromARGB(255, 73, 73, 73)
+                                  : Color.fromARGB(255, 245, 245, 245)),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               )
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Column(
-              children: [
-                ['1', '2', '3'],
-                ['4', '5', '6'],
-                ['7', '8', '9'],
-                ['#', '0', 'x']
-              ].map((item) => _buildRow(item)).toList(),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Column(
+                children: [
+                  ['1', '2', '3'],
+                  ['4', '5', '6'],
+                  ['7', '8', '9'],
+                  ['#', '0', 'x']
+                ].map((item) => _buildRow(item)).toList(),
+              ),
             ),
           ),
-          Container(
-            width: 200,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
-                  child: TextButton(
-                      child: Text('สมัคร'),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RegisterNumber()));
-                      }),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
-                  child: TextButton(
-                      child: Text('ล็อคอิน'), // ต้องมีการเช็คเงื่อนไขตรงนี้
-                      onPressed: () {
-                        if (_phone_number == cc) {
-                          print("successful");
+          Expanded(
+            child: Container(
+              width: 200,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30.0),
+                    child: TextButton(
+                        child: Text('สมัคร'),
+                        onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      Aricle_text(mode: mode)));
-                        } else {
-                          check_ID();
-                          // setState(() {});
-                        }
-                      }),
-                )
-              ],
+                                  builder: (context) => RegisterNumber()));
+                        }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30.0),
+                    child: TextButton(
+                        child: Text('ล็อคอิน'), // ต้องมีการเช็คเงื่อนไขตรงนี้
+                        onPressed: () {
+                          if (_phone_number == cc) {
+                            print("successful");
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Aricle_text(mode: mode)));
+                          } else {
+                            check_ID();
+                            // setState(() {});
+                          }
+                        }),
+                  )
+                ],
+              ),
             ),
           ),
         ],
