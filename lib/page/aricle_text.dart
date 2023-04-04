@@ -20,7 +20,7 @@ class _Aricle_textState extends State<Aricle_text> {
   _Aricle_textState(this.mode);
 
   void loaddata() async {
-    _content_text = await ApiClient().getAllcontents();
+    _content_text = await ApiClientServer().getAllcontents();
 
     setState(() {
       Future.delayed(Duration(seconds: 2));

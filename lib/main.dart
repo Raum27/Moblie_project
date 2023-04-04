@@ -5,7 +5,7 @@ void main() {
   runApp(const MyApp());
 }
 
-//  flutter run -d web-server --web-hostname 10.5.50.165 --web-port 8989
+//  flutter run -d web-server --web-hostname 192.168.1.226 --web-port 8989
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

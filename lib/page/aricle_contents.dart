@@ -20,7 +20,7 @@ class _Text_contentsState extends State<Text_contents> {
   Textsummarizer? _text_summarizer;
   _Text_contentsState(this.mode);
   void loadsummarizer(String str) async {
-    _text_summarizer = await ApiClient().summarizer(str);
+    _text_summarizer = await ApiClientServer().summarizer(str);
     setState(() {});
   }
 

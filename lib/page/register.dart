@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-
+import '../services/api_client.dart';
 import 'login.dart';
 
 class RegisterNumber extends StatefulWidget {
@@ -13,6 +11,11 @@ class RegisterNumber extends StatefulWidget {
 
 class _RegisterNumberState extends State<RegisterNumber> {
   final _controller = TextEditingController();
+
+  void sendId(var str) async {
+    await ApiClientServer().register(str);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,7 +97,7 @@ class _RegisterNumberState extends State<RegisterNumber> {
         onPressed: () {},
       ),
     );
-
+    sendId(_controller.text);
     home();
   }
 
@@ -115,3 +118,5 @@ class _RegisterNumberState extends State<RegisterNumber> {
     );
   }
 }
+
+class ApiClient {}

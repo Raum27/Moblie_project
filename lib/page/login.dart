@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:p_anonymus/page/register.dart';
+import 'package:p_anonymus/services/api_client.dart';
+import '../module/checkiduser.dart';
 import '../module/test.dart';
 import 'aricle_text.dart';
 
@@ -14,8 +18,13 @@ class Phone_layout extends StatefulWidget {
 class _Phone_layoutState extends State<Phone_layout> {
   var _phone_number = '';
   var mode = true;
+  UserIDcheck? checkIDuser;
   List<Testapi>? _testapi;
   static var cc = '#1123';
+  void check_USer() async {
+    checkIDuser = await ApiClientServer().login(_phone_number);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,17 +129,21 @@ class _Phone_layoutState extends State<Phone_layout> {
                     child: TextButton(
                         child: Text('ล็อคอิน'), // ต้องมีการเช็คเงื่อนไขตรงนี้
                         onPressed: () {
-                          if (_phone_number == cc) {
-                            print("successful");
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        Aricle_text(mode: mode)));
-                          } else {
-                            check_ID();
-                            // setState(() {});
-                          }
+                          check_USer();
+                          setState(() {
+                            if (checkIDuser!.status == true) {
+                              print("successful");
+                              _phone_number = '';
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Aricle_text(mode: mode)));
+                            } else {
+                              check_ID();
+                              // setState(() {});
+                            }
+                          });
                         }),
                   )
                 ],
@@ -142,14 +155,17 @@ class _Phone_layoutState extends State<Phone_layout> {
     );
   }
 
-  Row _buildRow(List<String> numberList) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // collection for
+  Widget _buildRow(List<String> numberList) {
+    return Expanded(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // collection for
 
-        for (var i = 0; i < numberList.length; i++) _buildButton(numberList[i]),
-      ],
+          for (var i = 0; i < numberList.length; i++)
+            _buildButton(numberList[i]),
+        ],
+      ),
     );
   }
 
@@ -168,7 +184,7 @@ class _Phone_layoutState extends State<Phone_layout> {
         child: Center(
           child: Text(number,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
         ),
       ),
     );
